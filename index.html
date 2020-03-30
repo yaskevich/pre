@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Comparing Language Models, by CompLing @ HSE">
+<meta name="author" content="Alyaxey Yaskevich">
+<meta property="og:url" content="https://vector.philology.by/project.html" />
+<title>Comparing Language Models (NRU HSE), 2019</title>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Merriweather&amp;subset=cyrillic-ext" rel="stylesheet">
+<link rel="stylesheet" href="tip.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+<link rel="stylesheet" href="micromodal.css">
+
+<!-- https://minicss.org/docs#card-sections -->
+<!-- https://minicss.org/v2/contextual -->
+<!-- https://micromodal.now.sh/#installation -->
+<!-- <link rel="stylesheet" href="mini-default.min.css"> -->
+<!-- <script src="d3.v3.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+<script src="typeit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/g/filesaver.js"></script>
+<script src="project.js"></script>
+<!-- <script src="d3tip.js"></script> -->
+<link rel="icon" 
+      type="image/png"       
+      href="https://img.icons8.com/color/48/000000/crazy--v1.png" />
+<!-- icon by https://icons8.com/license -->
+<style>
+*{
+font-family: 'Merriweather', serif;
+}
+.link {
+  stroke: #aaa;
+}
+
+.node text {
+stroke:#333;
+cursos:pointer;
+}
+
+/*
+.node circle{
+stroke:#fff;
+stroke-width:3px;
+fill:#555;
+}*/
+
+
+.low {
+	fill:#DB4437;
+	
+}
+.mid {
+	fill:#F4B400;
+}
+.high {
+	fill:#0F9D58;
+}
+</style>
+
+</head>
+<body>
+<header class="col-sm-6 col-sm-offset-3">
+  <a href="#" class="logo">
+  <!-- Logo -->
+  <img src="scandal-amaze-amazed-bargain.jpg" alt="Image description" style="height:48px;"/>
+  </a>
+  <!-- <a href="#" class="button">Home</a> -->
+  <button>Download</button>
+</header>
+	<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+		<h1>Comparing Language Models</h1>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<p>Nowadays language models are the most powerful instrument to transfer knowledge. Mostly pre-trained neural network models are more accurate in any type of tasks. This tendency in language processing - usage of LM weights as a part of base model weights - took place after word2vec announcing. Today there are three main ways to use pre-trained LM in different NLP tasks.
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<ul>
+			<li>Use pre-trained LM as universal embedder for text/sentence</li>
+			<li>Fit pre-trained LM on new data (domain adaptation) and also use as an embedder</li>
+			<li>Fit pre-trained LM as a part of more complex and specific model</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<p>It is important to note that the resulting model is very dependent on the quality of the based LM. So a possibility to compare models is also demanded and we propose a new comprehensive way to explore properties
+			 of different LMs.</p>
+		</div>
+	</div>
+	
+	  <div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<img src="newplot.png" alt="Image description"/>
+		</div>
+  </div>
+
+	
+	<div class="row">
+		<div class="col-sm-5 col-sm-offset-3">
+			<a class="button" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank">Run Puthon Notebook</a>  
+		</div>  
+		<div class="col-sm-1">
+			<!-- <button class="primary">Download</button> -->
+			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
+		</div>
+  </div>	
+  
+  <div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<form>
+			  <fieldset>
+				<legend>Data download customization</legend>
+				<input type="checkbox" id="nouns" name="nouns" value="1" checked="1">
+				<label for="nouns">Nouns</label>
+				<input type="checkbox" id="verbs" name="verbs" value="1" checked="1">
+				<label for="verbs">Verbs</label>
+				<input type="checkbox" id="adjs" name="adjs" value="1" checked="1">
+				<label for="adjs">Adjectives</label>
+				<input type="checkbox" id="advs" name="advs" value="1" checked="1">
+				<label for="advs">Adverbs</label>
+				<!-- <input type="button" value="Download" class="downloadbtn" /> -->
+			  </fieldset>
+			</form>
+		</div>  
+
+  </div>
+  
+  	  <div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
+			<!-- <a class="button primary downloadbtn" href="#" target="_blank">Download</a>   -->
+			<input type="button" value="Download" class="downloadbtn" />
+			<p class="example1"></p>
+		</div>
+  </div>
+  
+</div>
+
+<footer class="col-sm-6 col-sm-offset-3">
+  <p>
+			The work was done in terms of the <a href="https://www.hse.ru/ma/ling/" target="_blank">Master Program in Computational Linguistics</a>, at the National Research University Higher School of Economics, Moscow, 2019—2020.
+			</p>
+			<p>
+			<small><a href="https://icons8.com/icon/63234/crazy">Crazy icon by Icons8</a></small>
+
+			</p>
+</footer>
+</body>
+</html>
