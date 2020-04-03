@@ -1,14 +1,33 @@
 $(function() {
     var lang = "en";
     var strings = {};
+	var tab = "";
 	toggleLanguage(lang);
+	
     $(document).on("click", ".langswitch", function() {
-        console.log("switch");
         lang = (lang == "en" ? "ru" : "en");
         toggleLanguage(lang);
     }).on("click", ".downloadbtn", function() {
         download($(this).val() === "CSV");
+    }).on("click", ".tabs", function() {
+		toggleTabs($(this))
     });
+	
+	function toggleTabs(that){
+		var id = that.attr('id');
+		if(id !== tab) {
+			that.css('background-color', '#f8f8f8');
+			that.css('border', '1px dashed lightgray');
+			if (tab) {
+				$('#'+tab).css('background-color', '');
+				$('#'+tab).css('border', '');
+			}
+			tab = id;
+			var divsToHide  = $('.data:not(.hidden)');
+			$('.data.hidden').removeClass('hidden');
+			divsToHide.addClass('hidden');
+		} 		
+	}
 	
     function download(mode) {
         $.getJSON("nirs.json", function(data) {
@@ -77,6 +96,8 @@ $(function() {
             $('body').html(Mustache.render($('#template').html(), strings));
             $('title').text(strings["title"]);
             $('html').attr("lang", lang);
+			tab = "";
+			toggleTabs($('#btn_desc'));
         })
     }
 });
