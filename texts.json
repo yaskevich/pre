@@ -3,6 +3,10 @@
 		"en": "РУС/АНГЛ",
 		"ru": "RU/EN"
 	},
+	"data": {
+		"en": "Data",
+		"ru": "Данные"
+	},
 	"btn_desc": {
 		"en": "Description",
 		"ru": "Описание"
@@ -15,6 +19,24 @@
 		"en": "The site icon by",
 		"ru": "Значок сайта от"
 	},
+	
+	"NOUNS": {
+		"en": "noun",
+		"ru": "имя существительное"
+	},
+	"VERBS": {
+		"en": "verb",
+		"ru": "глагол"
+	},
+	"ADJECTIVES": {
+		"en": "adjective",
+		"ru": "имя прилагательное"
+	},
+	"ADVERBS": {
+		"en": "adverb",
+		"ru": "наречие"
+	},
+
 	"nn": {
 		"en": "nouns",
 		"ru": "сущ."
@@ -31,9 +53,10 @@
 		"en": "adverbs",
 		"ru": "наречия"
 	},
+	
 	"stops": {
-		"en": "Stopwords to exclude",
-		"ru": "Стоп-слова (убрать)" 
+		"en": "Stopwords in results to exclude",
+		"ru": "Стоп-слова в результатах (убрать)" 
 	},
 	"stops_tip": {
 		"en": "comma-separated",

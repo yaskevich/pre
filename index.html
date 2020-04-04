@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Comparing Language Models, by CompLing @ HSE">
+<meta name="description" content="Predictability via Language Models, by CompLing @ HSE, 2019-2020">
 <meta name="author" content="Alyaxey Yaskevich">
-<title>MP Comp Ling @ NRU HSE, 2019</title>
+<title>Predictability</title>
 <link href="https://fonts.googleapis.com/css?family=Merriweather&amp;subset=cyrillic-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- <script src="typeit.min.js"></script> -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 <script src="https://cdn.jsdelivr.net/g/filesaver.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
 <script src="project.js"></script>
 <link rel="icon" type="image/png" href="https://img.icons8.com/nolan/64/3d-scale.png" />
-<style>*{font-family: 'Merriweather', serif;}</style>
+<style>*{font-family: 'Merriweather', serif}</style>
 <script id="template" type="x-tmpl-mustache">
 <header class="col-lg-6 col-lg-offset-3">
   <a href="#" class="logo">
@@ -34,15 +35,6 @@
 		<!-- </div> -->
 	<!-- </div> -->
 	
-	<!-- <div class="row"> -->
-	<!-- <div class="col-sm-3 col-lg-offset-5">  -->
-		<!-- <div class="button-group">  -->
-			  <!-- <button>Button</button> -->
-			  <!-- <button>Button</button> -->
-			<!-- </div> -->
-			
-		<!-- </div> -->
-	<!-- </div> -->
 	<div class="row">
 		<div class="col-sm-4 col-lg-3 col-lg-offset-3 col-sm-offset-2">
 			<button class="small tabs dis" id="btn_desc" style="width: 100%;margin: 10px 0;">{{btn_desc}}</button>
@@ -55,15 +47,11 @@
 	<div class="row data hidden">
 		<div class="col-lg-6 col-lg-offset-3">
 			<h2>{{about}}</h2>
-			<!-- <p>Nowadays language models are the most powerful instrument to transfer knowledge. Mostly pre-trained neural network models are more accurate in any type of tasks. This tendency in language processing - usage of LM weights as a part of base model weights - took place after word2vec announcing. Today there are three main ways to use pre-trained LM in different NLP tasks. -->
-			<!-- </p> -->
 			{{#project}}
 				<p style="text-align: justify;">{{.}}</p>
 			{{/project}}			
 		</div>
 	</div>
-
-
 	<div class="row data">
 		<div class="col-lg-6 col-lg-offset-3">
 			<h2>{{res}}</h2>
@@ -71,39 +59,15 @@
 			<p style="text-align: justify;">{{meta_desc}}</p>
 			<h3>{{sel}}</h3>
 			<p style="text-align: justify;">{{sel_desc}}</p>
-			<!-- <p></p> -->
-			<!-- <p>Nowadays language models are the most powerful instrument to transfer knowledge. Mostly pre-trained neural network models are more accurate in any type of tasks. This tendency in language processing - usage of LM weights as a part of base model weights - took place after word2vec announcing. Today there are three main ways to use pre-trained LM in different NLP tasks. -->
-			<!-- </p> -->
-			<!-- {{#descr}} -->
-			<!-- <p style="text-align: justify;">{{.}}</p> -->
-			<!-- {{/descr}} -->
-			
 		</div>
 	</div>
-	<!-- <div class="row"> -->
-		<!-- <div class="col-sm-6 col-sm-offset-3"> -->
-			<!-- <ul> -->
-			<!-- <li>Use pre-trained LM as universal embedder for text/sentence</li> -->
-			<!-- <li>Fit pre-trained LM on new data (domain adaptation) and also use as an embedder</li> -->
-			<!-- <li>Fit pre-trained LM as a part of more complex and specific model</li> -->
-			<!-- </ul> -->
-		<!-- </div> -->
-	<!-- </div> -->
-	<!-- <div class="row"> -->
-		<!-- <div class="col-sm-6 col-sm-offset-3"> -->
-			<!-- <p>It is important to note that the resulting model is very dependent on the quality of the based LM. So a possibility to compare models is also demanded and we propose a new comprehensive way to explore properties -->
-			 <!-- of different LMs.</p> -->
-		<!-- </div> -->
-	<!-- </div> -->
-	
 	  <div class="row data hidden">
 		<div class="col-lg-6 col-lg-offset-3">
 			<img src="chart.png" alt="Mean accuracy in prediction of models"/>
 			<!-- <img src="" alt="Mean accuracy in prediction of models"/> -->
 		</div>
   </div>
-
-	
+  
 	<div class="row data hidden">
 		<div class="col-lg-6 col-lg-offset-3">
 			<a class="button primary" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank" >{{run}}</a>  
@@ -144,16 +108,36 @@
   </div>
   
   	  <div class="row data">
-		<div class="col-lg-6 col-lg-offset-3">
+		<div class="col-lg-5 col-sm-5 col-lg-offset-3">
 			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
 			<!-- <a class="button primary downloadbtn" href="#" target="_blank">Download</a>   -->
 			<!-- <input type="button" value="{{load}}" class="downloadbtn" /> -->
+			<div>
 			<span>{{load}}</span>
+			<span style="white-space:nowrap;">
 			<input type="button" value="JSON" class="downloadbtn" />
 			<input type="button" value="CSV" class="downloadbtn" />
-			<p class="example1"></p>
+			</span>
+			</div>
+			
+
 		</div>
-  </div>
+		<div class="col-lg-1">
+			<!-- <button class="primary">Download</button> -->
+			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
+			<input type="button" value="Preview" class="previewbtn primary" />
+			
+		</div>
+	</div>
+	
+	
+	<div class="row hidden">
+		<div class="col-lg-6 col-lg-offset-3">
+		<h2>{{data}}</h2>
+			<div class="keylist">
+			</div>
+		</div>
+	</div>
   
 </div>
 
