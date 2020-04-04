@@ -21,11 +21,8 @@
 <header class="col-lg-6 col-lg-offset-3">
   <a href="#" class="logo">
 	<!-- <img src="scandal-amaze-amazed-bargain.jpg" alt="Image description" style="height:48px;"/> -->
-	<span style="color:black;font-size:1.1em;">{{title}}</span>
+	<span class="title" style="color:black;font-size:1.1em;">{{title}}</span>
   </a>
-  <!-- <a href="#" class="button">Home</a> -->
-  <!-- <button>Download</button> -->
-  <!-- <input type="button" class="about" value="{{res}}" /> -->
   <input type="button" class="langswitch" value="{{switch_lang}}" style="float:right;"/>
 </header>
 	<div class="container">
@@ -36,10 +33,10 @@
 	<!-- </div> -->
 	
 	<div class="row">
-		<div class="col-sm-4 col-lg-3 col-lg-offset-3 col-sm-offset-2">
+		<div class="col-sm-5 col-lg-3 col-lg-offset-3 col-sm-offset-1">
 			<button class="small tabs dis" id="btn_desc" style="width: 100%;margin: 10px 0;">{{btn_desc}}</button>
 		</div>
-		<div class="col-sm-4 col-lg-3">
+		<div class="col-sm-5 col-lg-3">
 			<button class="small tabs act" id="btn_res" style="width: 100%;margin: 10px 0;">{{btn_res}}</button>
 		</div>
 	</div>	
@@ -64,22 +61,17 @@
 	  <div class="row data hidden">
 		<div class="col-lg-6 col-lg-offset-3">
 			<img src="chart.png" alt="Mean accuracy in prediction of models"/>
-			<!-- <img src="" alt="Mean accuracy in prediction of models"/> -->
 		</div>
   </div>
   
 	<div class="row data hidden">
-		<div class="col-lg-6 col-lg-offset-3">
-			<a class="button primary" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank" >{{run}}</a>  
+		<div class="col-lg-6 col-lg-offset-3 col-sm-12" style="text-align: center">
+			<a class="button secondary" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank" >{{run}}</a>  
 		</div>  
-		<div class="col-sm-1">
-			<!-- <button class="primary">Download</button> -->
-			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
-		</div>
   </div>	
   
   <div class="row data">
-		<div class="col-lg-6 col-lg-offset-3">
+		<div class="col-lg-6 col-md-6 col-lg-offset-3">
 			<form>
 			  <p>{{cust}}</p>
 			  <fieldset>
@@ -107,26 +99,19 @@
 
   </div>
   
-  	  <div class="row data">
-		<div class="col-lg-5 col-sm-5 col-lg-offset-3">
-			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
-			<!-- <a class="button primary downloadbtn" href="#" target="_blank">Download</a>   -->
-			<!-- <input type="button" value="{{load}}" class="downloadbtn" /> -->
-			<div>
-			<span>{{load}}</span>
-			<span style="white-space:nowrap;">
+  <div class="row data">
+		<div class="col-lg-5 col-sm-8 col-md-4 col-lg-offset-3">
+			<!-- <div> -->
+			<span class="hidden-sm">{{load}}</span>
+			<!-- <span style="white-space:nowrap;"> -->
 			<input type="button" value="JSON" class="downloadbtn" />
 			<input type="button" value="CSV" class="downloadbtn" />
-			</span>
-			</div>
-			
+			<!-- </span> -->
+			<!-- </div> -->
 
 		</div>
-		<div class="col-lg-1">
-			<!-- <button class="primary">Download</button> -->
-			<!-- <a class="button primary" href="/nirs.json" target="_blank">Download</a>   -->
+		<div class="col-lg-2 col-sm-1 col-md-3">
 			<input type="button" value="Preview" class="previewbtn primary" />
-			
 		</div>
 	</div>
 	

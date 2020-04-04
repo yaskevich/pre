@@ -118,6 +118,9 @@ $(function() {
         $('body').html(Mustache.render($('#template').html(), locale));
         $('title').text(locale["title"]);
         $('html').attr("lang", lang);
+		if (lang === "ru" && $(window).width() < 400) {
+			setTimeout(function () { $('.title').text(locale["title"].slice(0,-3)+'...')}, 5000);
+		}
         tab = "";
         toggleTabs($('#btn_desc'));
     }
