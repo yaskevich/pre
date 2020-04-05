@@ -19,7 +19,10 @@
 		"en": "The site icon by",
 		"ru": "Значок сайта от"
 	},
-	
+	"graph":{
+		"en": "Mean accuracy in prediction of models",
+		"ru": "Средняя точность в предсказаниях моделей"	
+	},
 	"NOUNS": {
 		"en": "noun",
 		"ru": "имя существительное"
@@ -125,6 +128,6 @@
 	},
 	"sel_desc": {
 		"ru": "Результаты исследований показали, что если принять модель cloze test в качестве базовой (то есть отражающей свойства и особенности порождения речи человеком)  и считать ее результаты наиболее правдоподобными, то самыми близкими к ней по значениям метрик являются  скрытая марковская модель и BERT. Ниже приведена таблица, построенная на базе дивергенции Кульбака-Лейблера для контекстов разной длины. Результаты показали, что на коротких контекстах лучше работает скрытая марковская модель, а на длинных - BERT. Кроме того, мы экспериментировали с разнообразными контекстами длиной 1 токен (наиболее частотные слова самостоятельных частей речи – существительные, прилагательные, глаголы, наречия, – выбранные с помощью НКРЯ).  Ни одна из существующих предобученных ИЯМ не показывает в таких условиях высокого качества, то есть ИЯМ не генерируют короткие устойчивые выражения (частотные биграммы) в бесконтекстных условиях. Поэтому мы предоставляем корпус, отражающий частотную модель на базе НКРЯ; он может быть использован в образовательных целях, для подготовки курсах русского языка для иностранцев.",
-		"en": "The research results showed that if we accept the cloze test model as the basic one (i.e. it obtains the property of human speech generation model) and consider its results the most plausible, then the most similar models (according to our metric results)  are hidden Markov model (HMM) and BERT. The table below is based on the Kullback-Leibler divergence for contexts of different lengths. According to the results, while HMM works better on short texts, BERT shows higher results on long ones. In addition, we experimented on specific contexts (the most frequent words which belong to open classes – nouns, verbs, adjectives, adverbs – selected with the help of NCRL) of length 1. None of the existing pre-trained ALMs show high quality, i.e. ALMs do not generate collocations(frequent bigrams) in contextless conditions. Therefore, we provide a corpus reflecting the frequency model based on NCRL which can be useful for educational purposes in Russian language courses for foreign students."
+		"en": "The research results showed that if we accept the cloze test model as the basic one (i.e. it obtains the property of human speech generation model) and consider its results the most plausible, then the most similar models (according to our metric results)  are hidden Markov model (HMM) and BERT. The table below is based on the Kullback-Leibler divergence for contexts of different lengths. According to the results, while HMM works better on short texts, BERT shows higher results on long ones. In addition, we experimented on specific contexts (the most frequent words which belong to open classes – nouns, verbs, adjectives, adverbs – selected with the help of NCRL) of length 1. None of the existing pre-trained ALMs show high quality, i.e. ALMs do not generate collocations (frequent bigrams) in contextless conditions. Therefore, we provide a corpus reflecting the frequency model based on NCRL which can be useful for educational purposes in Russian language courses for foreign students."
 	}
 }

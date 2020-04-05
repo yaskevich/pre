@@ -14,9 +14,50 @@
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script src="https://cdn.jsdelivr.net/g/filesaver.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
 <script src="project.js"></script>
 <link rel="icon" type="image/png" href="https://img.icons8.com/nolan/64/3d-scale.png" />
-<style>*{font-family: 'Merriweather', serif}</style>
+<style>
+*{font-family: 'Merriweather', serif}
+.axis path,.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.bar:hover {
+  fill: rgba(0, 0, 0, 0.8);
+}
+.capmodels{
+font-size: 1em;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+</style>
 <script id="template" type="x-tmpl-mustache">
 <header class="col-lg-6 col-lg-offset-3">
   <a href="#" class="logo">
@@ -48,27 +89,49 @@
 				<p style="text-align: justify;">{{.}}</p>
 			{{/project}}			
 		</div>
+				
+
 	</div>
 	<div class="row data">
 		<div class="col-lg-6 col-lg-offset-3">
 			<h2>{{res}}</h2>
 			<h3>{{meta}}</h3>
 			<p style="text-align: justify;">{{meta_desc}}</p>
+		</div>
+	</div>
+
+	<div class="row data">
+		<div class="col-lg-6 col-lg-offset-3 col-sm-12" style="text-align: center">
+			<a class="button secondary" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank" >{{run}}</a>  
+		</div>  
+  </div>  
+
+
+	<div class="row data">
+		<div class="col-lg-6 col-lg-offset-3">
 			<h3>{{sel}}</h3>
 			<p style="text-align: justify;">{{sel_desc}}</p>
 		</div>
 	</div>
-	  <div class="row data hidden">
-		<div class="col-lg-6 col-lg-offset-3">
+	
+	<div class="row data hidden">
+		<div class="col-lg-6 col-lg-offset-3 col-sm-12" style="text-align: center">
 			<img src="chart.png" alt="Mean accuracy in prediction of models"/>
 		</div>
   </div>
   
 	<div class="row data hidden">
-		<div class="col-lg-6 col-lg-offset-3 col-sm-12" style="text-align: center">
-			<a class="button secondary" href="https://colab.research.google.com/drive/1Mrghxg4IIhquig1swzqLyrsRytccwTNj" target="_blank" >{{run}}</a>  
-		</div>  
-  </div>	
+		<div class="col-lg-6 col-lg-offset-3 col-sm-12">
+			<h4 class="graphheader">{{graph}}</h4>
+			<div class="graph"style="height:450px;"></div>
+		</div>
+  </div>
+	
+	
+
+
+
+  
   
   <div class="row data">
 		<div class="col-lg-6 col-md-6 col-lg-offset-3">
@@ -76,12 +139,20 @@
 			  <p>{{cust}}</p>
 			  <fieldset>
 				<legend style="font-weight:100;">{{pos}}</legend>
+				<span style="white-space:nowrap">
 				<input type="checkbox" id="nouns" name="nouns" value="1" checked="1">
 				<label for="nouns">{{nn}}</label>
+				</span>
+				<span style="white-space:nowrap">
 				<input type="checkbox" id="verbs" name="verbs" value="1" checked="1">
 				<label for="verbs">{{vb}}</label>
+				</span>
+				
+				<span style="white-space:nowrap">
 				<input type="checkbox" id="adjs" name="adjs" value="1" checked="1">
 				<label for="adjs">{{aj}}</label>
+				</span>
+				
 				<span style="white-space:nowrap">
 				<input type="checkbox" id="advs" name="advs" value="1" checked="1">
 				<label for="advs">{{av}}</label>
@@ -90,7 +161,7 @@
 			  <fieldset>
 				<legend style="font-weight:100;">{{stops}}</legend>
 				<input type="checkbox" id="stops" name="stops" value="1"/>
-				<input type="text" value="в,и,к,а" class="stopline"/><small style="color:gray;">{{stops_tip}}</small>
+				<input type="text" value="и,в,во,не,я,с,со,а," class="stopline"/><small style="color:gray;">{{stops_tip}}</small>
 				
 				<!-- <label for="stops">{{stops}}</label> -->
 			  </fieldset>
@@ -102,6 +173,7 @@
   <div class="row data">
 		<div class="col-lg-5 col-sm-8 col-md-4 col-lg-offset-3">
 			<!-- <div> -->
+			
 			<span class="hidden-sm">{{load}}</span>
 			<!-- <span style="white-space:nowrap;"> -->
 			<input type="button" value="JSON" class="downloadbtn" />
@@ -116,16 +188,16 @@
 	</div>
 	
 	
-	<div class="row hidden">
+	<div class="row data">
 		<div class="col-lg-6 col-lg-offset-3">
-		<h2>{{data}}</h2>
+		<h2 class="dataheader hidden">{{data}}</h2>
 			<div class="keylist">
 			</div>
 		</div>
 	</div>
   
 </div>
-
+<div class="row data hidden anchor"></div>
 <footer class="col-lg-6 col-lg-offset-3">
 	<p>
 		{{footer1}}&nbsp;
