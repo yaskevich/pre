@@ -1,3 +1,4 @@
+/*jshint sub:true*/
 var data, texts;
 $(function() {
     var lang = "en";
@@ -33,7 +34,7 @@ $(function() {
     }).on("click", ".previewbtn", function() {
         download(true, true);
     }).on("click", ".tabs", function() {
-        toggleTabs($(this))
+        toggleTabs($(this));
     }).on("scroll", function () {
 		// var ww = parseInt($(window).height());
 		// var hh = parseInt($(".graphheader").offset().top);
@@ -100,23 +101,31 @@ $(function() {
                 if (todo[unit[1]]) {
 
                     if (mode) {
-                        for (var el of data[prop]) {
-                            if (stops.indexOf(el[0]) === -1) {
+						var array = data[prop];
+						for (index = 0; index < array.length; index++) { 
+							var el = array[index];
+							if (stops.indexOf(el[0]) === -1) {
                                 csv += [unit[0], unit[1]].concat(el).join(',') + "\n";
                                 vals += '<mark class="secondary" data-tippy-content="' + el[1] + '">' + el[0] + '</mark> ';
                             }
-                        }
+						} 
+                        // for (var el of data[prop]) {
+                            // if (stops.indexOf(el[0]) === -1) {
+                                // csv += [unit[0], unit[1]].concat(el).join(',') + "\n";
+                                // vals += '<mark class="secondary" data-tippy-content="' + el[1] + '">' + el[0] + '</mark> ';
+                            // }
+                        // }
                     } else {
                         datum[prop] = stops.length ?
                             data[prop].filter(function(d) {
-                                return stops.indexOf(d[0]) == -1
+                                return stops.indexOf(d[0]) == -1;
                             }) :
                             data[prop];
                     }
                 }
                 if (vals) {
                     if (++i > 5) {
-                        break
+                        break;
                     }
                     kl.append('<div class="card fluid"><div class="section"><h3 class="doc"><span data-tippy-content="' + locale[unit[1]] + '">' + unit[0] + '</span></h3><p class="doc">' + vals + '</p></div></div>');
                 }
@@ -145,7 +154,7 @@ $(function() {
         $('html').attr("lang", lang);
         if (lang === "ru" && $(window).width() < 400) {
             setTimeout(function() {
-                $('.title').text(locale["title"].slice(0, -3) + '...')
+                $('.title').text(locale["title"].slice(0, -3) + '...');
             }, 5000);
         }
         tab = "";
@@ -176,7 +185,7 @@ $(function() {
 
 
         var x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], .1);
+            .rangeRoundBands([0, width], 0.1);
 
         var y = d3.scale.linear()
             .range([height, 0]);
@@ -194,8 +203,8 @@ $(function() {
             .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html(function(d) {
-                return "<strong>" + d.Info + ":</strong> <span style='color:red'>" + d.Value + "</span>";
-            })
+                return "<strong>" + d.tip + "</strong><br/><span style='color:red'>" + d.value + "</span>";
+            });
 
         var svg = d3.select(".graph").append("svg")
             .attr('width', width + margin.right + margin.left)
@@ -206,37 +215,92 @@ $(function() {
         svg.call(tip);
 
         var data = [{
-            "Info": "1k monkeys",
-            "Value": "0.706",
-            "value": null
+            "name": "1k monkeys",
+            "value": "0.706"
         }, {
-            "Info": "HMM 2gr Lit",
-            "Value": "0.3",
-            "value": null
+            "name": "HMM 2gr Lit",
+            "value": "0.3"
         }, {
-            "Info": "Cloze Task",
-            "Value": "0.090",
-            "value": null
+            "name": "Cloze Task",
+            "value": "0.090"
         }, {
-            "Info": "Bert",
-            "Value": "0.528",
-            "value": null
+            "name": "Bert",
+            "value": "0.528"
         }, {
-            "Info": "Bert News + NKRA",
-            "Value": "0.037",
-            "value": null
+            "name": "Bert News + NKRA",
+            "value": "0.037"
         }, {
-            "Info": "LSTM",
-            "Value": "0.419",
-            "value": null
+            "name": "LSTM",
+            "value": "0.419"
         }];
+		
+		
+		data = [
+				{ 
+					"name": "Cloze task", 
+					"value": 0.18503591191110105, 
+					"tip": "Cloze test"
+				},
+				{ 
+					"name": "HMM 2gr Lit", 
+					"value": 0.0434673246188485, 
+					"tip":  "Bigram hidden Markov model<br/>based on Russian literature"
+				},
+				{ 
+					"name": "HMM 2gr Paper", 
+					"value": 0.04134700484225046, 
+					"tip":  "Bigram hidden Markov model<br/>based on Russian news texts"
+				},
+				{ 
+					"name": "HMM 3gr Paper", 
+					"value": 0.04727593532858293, 
+					"tip":  "Trigram hidden Markov model<br/>based on Russian news test"
+				},
+				{ 
+					"name": "HMM 3gr LitPaper", 
+					"value": 0.06709134504419015, 
+					"tip":  "Trigram hidden Markov model<br/>based on Russian literature"
+				},
+				{ 
+					"name": "Bert", 
+					"value": 0.21068725235598512, 
+					"tip":  "BERT Large based on Russian wikipedia"
+				},
+				{ 
+					"name": "Bert News", 
+					"value": 0.24351086054539203, 
+					"tip":  "BERT Large finetuned<br/>on Russian news texts"
+				},
+				{ 
+					"name": "Bert NCRL", 
+					"value": 0.2543190053910093, 
+					"tip":  "BERT finetuned<br/> on Russian literature"
+				},
+				{ 
+					"name": "Bert News+NCRL", 
+					"value": 0.24540072382437783, 
+					"tip":  "BERT finetuned on<br/>full texts of the National<br/>Corpus of Russian Language"
+				},
+				{ 
+					"name": "HMM 2gr - Bert", 
+					"value":  0.11961189681433873, 
+					"tip":  "Mixture of two models:<br/>bigram HMM + BERT"
+				},				
+				{ 
+					"name": "LSTM", 
+					"value": 0.11231992611870391, 
+					"tip":  "LSTM based on Russian wikipedia"
+				}
+
+			];
+		
         // console.log(JSON.stringify(data));
 
         x.domain(data.map(function(d) {
-            return d.Info;
+            return d.name;
         }));
         y.domain([0, d3.max(data, function(d) {
-            return d.Value;
+            return d.value;
         })]);
 
         // var colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"];
@@ -245,7 +309,7 @@ $(function() {
 
         var colorScale = d3.scale.quantile()
             .domain([0, colors.length - 1, d3.max(data, function(d) {
-                return d.Value;
+                return d.value;
             })])
             .range(colors);
 
@@ -272,7 +336,6 @@ $(function() {
 
         // .style("text-anchor", "end")
         //.text("Models")
-        ;
 
 
 
@@ -280,7 +343,7 @@ $(function() {
 				// svg.selectAll(".bar")
 				// 
 				// .attr("height", function(d) {
-                 // return height - y(d.Value);
+                 // return height - y(d.value);
 				// //return 0;
 				// })
 
@@ -301,14 +364,14 @@ $(function() {
             .on('mouseout', tip.hide)
             .attr("class", "bar")
             .attr("x", function(d) {
-                return x(d.Info);
+                return x(d.name);
             })
             .attr("width", x.rangeBand())
 			.attr("y", function(d) {
                 return y(0);
             })
             .attr("height", function(d) {
-                // return height - y(d.Value);
+                // return height - y(d.value);
 				return 0;
             })
 			
@@ -323,15 +386,15 @@ $(function() {
 			.ease('bounce')
 				
             .attr("y", function(d) {
-                return y(d.Value);
+                return y(d.value);
             })
             .attr("height", function(d) {
-                return height - y(d.Value);
+                return height - y(d.value);
 				// return 0;
             })
             .attr("fill", function(d) {
-                return colorScale(d.Value);
-            })
+                return colorScale(d.value);
+            });
 
 
 
