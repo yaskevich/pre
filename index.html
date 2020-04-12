@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Predictability via Language Models, by CompLing @ HSE, 2019-2020">
+<meta name="description" content="Predictability via Language Models, by CompLing @ HSE, 2019–2020">
 <meta name="author" content="Alyaxey Yaskevich">
 <title>Predictability</title>
 <link href="https://fonts.googleapis.com/css?family=Merriweather&amp;subset=cyrillic-ext" rel="stylesheet">
@@ -136,7 +136,7 @@ font-size: 1em;
 			<form>
 			  <p>{{cust}}</p>
 			  <fieldset>
-				<legend style="font-weight:100;">{{pos}}</legend>
+				<legend style="font-weight:100;">{{{pos}}}</legend>
 				<span style="white-space:nowrap">
 				<input type="checkbox" id="nouns" name="nouns" value="1" checked="1">
 				<label for="nouns">{{nn}}</label>
@@ -157,9 +157,9 @@ font-size: 1em;
 				</span>
 			  </fieldset>
 			  <fieldset>
-				<legend style="font-weight:100;">{{stops}}</legend>
+				<legend style="font-weight:100;">{{{stops}}}</legend>
 				<input type="checkbox" id="stops" name="stops" value="1"/>
-				<input type="text" value="и,в,во,не,я,с,со,а," class="stopline"/><small style="color:gray;">{{stops_tip}}</small>
+				<input type="text" value="и,в,во,не,я,с,со,а," class="stopline"/><br/><small style="color:gray;">{{stops_tip}}</small>
 				
 				<!-- <label for="stops">{{stops}}</label> -->
 			  </fieldset>
@@ -189,6 +189,8 @@ font-size: 1em;
 	<div class="row data">
 		<div class="col-lg-6 col-lg-offset-3">
 		<h2 class="dataheader hidden">{{data}}</h2>
+			<!-- <p class="explanation"></p> -->
+			<div class="card fluid explanation warning hidden"><p></p></div>
 			<div class="keylist">
 			</div>
 		</div>

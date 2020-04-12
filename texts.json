@@ -11,6 +11,38 @@
 		"en": "Data",
 		"ru": "Данные"
 	},
+	"nothing":{
+		"en": "At least <b>one</b> Part of Speech must be selected!",
+		"ru": "Должна быть выбрана хотя бы одна часть речи!"
+	},
+	"val_unfilt":{
+		"en": "Values were not filtered by stopwords.",
+		"ru":  "Значения без фильтрации по стоп-словам."
+	}, 
+	"key_unfilt":{
+		"en": "Keys were not filtered by Part of Speech.",
+		"ru":  "Ключи без фильтрации по части речи."
+	}, 
+	"tokens":{
+		"en": "Tokens",
+		"ru":  "Слова"
+	}, 
+	"classed":{
+		"en": "classed as",
+		"ru":  "класса"
+	}, 
+	"filt_keys":{
+		"en": "were removed from keys.",
+		"ru":  "были убраны из ключей."
+	}, 
+	"filt_vals":{
+		"en": "were filtered out from values.",
+		"ru":  "были убраны из значений."
+	}, 
+	"lim":{
+		"en": "first items are shown.<br/>Download all data in JSON or CSV format.",
+		"ru":  "первых элементов отображены.<br/>Данные в полном виде можно скачать в формате JSON или CSV."
+	}, 
 	"btn_desc": {
 		"en": "Description",
 		"ru": "Описание"
@@ -60,18 +92,17 @@
 		"en": "adverbs",
 		"ru": "наречия"
 	},
-	
 	"stops": {
-		"en": "Stopwords in results to exclude",
-		"ru": "Стоп-слова в результатах (убрать)" 
+		"en": "Stopwords in results (values). Check to <b>ex</b>clude",
+		"ru": "Стоп-слова в результатах (значения). <b>Не</b>&nbsp;показывать, если выбрано" 
 	},
 	"stops_tip": {
-		"en": "comma-separated",
-		"ru": "разделитель – запятая" 
+		"en": "Put additional tokens to filter (comma separated)",
+		"ru": "Можно добавить слова для фильтрации (разделитель – запятая)" 
 	},
 	"pos": {
-		"en": "Parts of speech to include",
-		"ru": "Части речи (оставить)" 
+		"en": "Parts of speech (keys). Check to <b>in</b>clude",
+		"ru": "Части речи (ключи). Показывать выбранные" 
 	},
 	"table": {
 		"en": ["key", "class", "token", "probability"],

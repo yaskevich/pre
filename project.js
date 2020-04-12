@@ -1,5 +1,6 @@
 /*jshint sub:true*/
 var data, texts;
+var limit = 60;
 var expdata = [{
         "name": "Cloze task",
         "value": 0.18503591191110105,
@@ -161,8 +162,15 @@ $(function() {
             "ADJECTIVES": $('#adjs').prop('checked'),
             "ADVERBS": $('#advs').prop('checked')
         };
-        if (todo["NOUNS"] + todo["VERBS"] + todo["ADJECTIVES"] + todo["ADVERBS"]) {
+		var classes = todo["NOUNS"] + todo["VERBS"] + todo["ADJECTIVES"] + todo["ADVERBS"];
+        if (classes) {
             var datum = {};
+			var share = limit/classes;
+			var counters = {};
+			for (var prop in todo) {
+				counters[prop] = share;
+			}
+			
             var csv = mode ? (locale["table"].join(',') + "\n") : null;
             var stops = [];
             if ($('#stops').prop('checked')) {
@@ -204,10 +212,19 @@ $(function() {
                     }
                 }
                 if (vals) {
-                    if (++i > 5) {
-                        break;
-                    }
-                    kl.append('<div class="card fluid"><div class="section"><h3 class="doc"><span data-tippy-content="' + locale[unit[1]] + '">' + unit[0] + '</span></h3><p class="doc">' + vals + '</p></div></div>');
+                    // if ((++i < 50) && preview) {						
+					if (preview){
+						if (i < limit) {
+							if (counters[unit[1]]){
+								counters[unit[1]]--;
+								kl.append('<div class="card fluid"><div class="section"><h3 class="doc"><span data-tippy-content="' + locale[unit[1]] + '">' + unit[0] + '</span></h3><p class="doc">' + vals + '</p></div></div>');
+								i++;
+							}
+							// break;
+						} else {
+							break;
+						}
+					}
                 }
             }
             if (!preview) {
@@ -218,9 +235,25 @@ $(function() {
                 });
                 saveAs(file, fn);
             } else {
+				var filtArr = []
+				for (var item in todo) {
+					if (!todo[item]) {
+						filtArr.push(locale[item]);
+					}
+				}
+				
+				var stopEx = stops.length ? locale["tokens"] + " " + stops.map(function(d){ return d ?'<mark class="tertiary">'+d+'</mark>':''}).join(' ')+ " " + locale["filt_vals"]: locale["val_unfilt"];
+				
+				var ex = (filtArr.length? locale["tokens"] + " " + locale["classed"] + " " + filtArr.map(function(d){return d?'<mark class="tertiary">'+d+'</mark>':''}).join(' ') + " " + locale["filt_keys"] : locale["key_unfilt"]) + "<br/>" +stopEx +"<br/> <strong>"+ limit +"</strong> " + locale["lim"];
+				$('.explanation').removeClass("hidden");
+				$('.explanation > p').html(ex);
                 tippy('[data-tippy-content]');
             }
-        }
+        } else {
+			$('.explanation').removeClass("hidden");
+			$('.explanation > p').html(locale["nothing"]);
+			$(".keylist").empty();
+		}
     }
     function toggleLanguage(lang) {
         locale = {};
